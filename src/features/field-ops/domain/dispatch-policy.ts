@@ -3,6 +3,7 @@ import type { IncidentReport } from "./incident-engine";
 import {
   BUILDING_OBSTACLE,
   buildSiteRoute,
+  incidentMapPoint,
   type MapObstacle,
   type MapPoint,
   responderDestination,
@@ -14,7 +15,7 @@ import {
 export type ResponsePlanItem = {
   guard: Guard;
   route: MapPoint[];
-  routeLength: number;
+  distanceToIncident: number;
   travelMs: number;
   etaMinutes: number;
 };
@@ -55,9 +56,15 @@ export function buildResponsePlan(
   obstacle: MapObstacle = BUILDING_OBSTACLE,
 ): ResponsePlanItem[] {
   const requesterId = requestingGuardId(report.transcript);
+  const incidentPoint = incidentMapPoint(report.location);
 
   return GUARDS.filter((guard) => guard.id !== requesterId)
     .map((guard) => {
+      const routeToIncident = buildSiteRoute(
+        guard.position,
+        incidentPoint,
+        obstacle,
+      );
       const route = buildSiteRoute(
         guard.position,
         responderDestination(report.location, guard.id),
@@ -66,14 +73,14 @@ export function buildResponsePlan(
       return {
         guard,
         route,
-        routeLength: routeLength(route),
+        distanceToIncident: routeLength(routeToIncident),
         travelMs: routeTravelDuration(route),
-        etaMinutes: routeEtaMinutes(route),
+        etaMinutes: routeEtaMinutes(routeToIncident),
       };
     })
     .sort(
       (first, second) =>
-        first.routeLength - second.routeLength ||
+        first.distanceToIncident - second.distanceToIncident ||
         first.guard.id.localeCompare(second.guard.id),
     );
 }

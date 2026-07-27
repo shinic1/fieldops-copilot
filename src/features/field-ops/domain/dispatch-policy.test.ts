@@ -16,7 +16,7 @@ describe("dispatch policy", () => {
 
     expect(
       buildResponsePlan(northReport).map((item) => item.guard.id),
-    ).toEqual(["G-01", "G-03", "G-04", "G-02"]);
+    ).toEqual(["G-01", "G-03", "G-02", "G-04"]);
     expect(buildResponsePlan(southReport)[0]?.guard.id).toBe("G-04");
   });
 
