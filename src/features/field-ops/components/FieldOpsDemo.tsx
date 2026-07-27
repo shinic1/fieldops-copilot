@@ -127,7 +127,7 @@ export function FieldOpsDemo() {
   const [responseState, setResponseState] =
     useState<ResponseState>("idle");
   const [copilotTab, setCopilotTab] = useState<CopilotTab>("incident");
-  const [selectedGuard, setSelectedGuard] = useState("G-03");
+  const [selectedGuard, setSelectedGuard] = useState("maya-chen");
   const [dispatchedGuards, setDispatchedGuards] = useState<string[]>([]);
   const [arrivedGuards, setArrivedGuards] = useState<string[]>([]);
   const [guardPositions, setGuardPositions] = useState<
@@ -475,7 +475,9 @@ export function FieldOpsDemo() {
     setActivity((items) => [
       {
         id: `dispatch-${activeReport.id}-${guard.id}`,
-        title: `${guard.id} ${automated ? "auto-dispatched" : "dispatched"}`,
+        title: `${guard.name} ${
+          automated ? "auto-dispatched" : "dispatched"
+        }`,
         detail: `${guard.name} → ${
           activeReport.location ?? "incident location"
         }`,
@@ -512,7 +514,7 @@ export function FieldOpsDemo() {
       setActivity((items) => [
         {
           id: `arrival-${activeReport.id}-${guard.id}`,
-          title: `${guard.id} arrived`,
+          title: `${guard.name} arrived`,
           detail: `${guard.name} · ${
             activeReport.location ?? "incident location"
           }`,
@@ -589,7 +591,7 @@ export function FieldOpsDemo() {
     setDemoStage("ready");
     setResponseState("idle");
     setCopilotTab("incident");
-    setSelectedGuard("G-03");
+    setSelectedGuard("maya-chen");
     setDispatchedGuards([]);
     setArrivedGuards([]);
     setGuardPositions(createInitialGuardPositions());
@@ -759,7 +761,7 @@ export function FieldOpsDemo() {
                     key={guard.id}
                     onClick={() => setSelectedGuard(guard.id)}
                   >
-                    <span>{guard.id}</span>
+                    <span>{guard.initials}</span>
                     <strong>{guard.name}</strong>
                     <small>
                       {requestingOfficerId === guard.id
@@ -885,7 +887,7 @@ export function FieldOpsDemo() {
                       top: `${guardPositions[guard.id]?.y ?? guard.position.y}%`,
                     }}
                   >
-                    <span>{guard.id.replace("G-0", "")}</span>
+                    <span>{guard.initials}</span>
                     <i />
                   </button>
                 ))}
@@ -1304,7 +1306,7 @@ export function FieldOpsDemo() {
                                     key={guard.id}
                                     onClick={() => dispatchGuard(guard.id)}
                                   >
-                                    <span>{guard.id}</span>
+                                    <span>{guard.initials}</span>
                                     {guard.name}
                                     <small>ETA {etaMinutes} min</small>
                                   </button>

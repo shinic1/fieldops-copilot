@@ -12,7 +12,7 @@ describe("site routing", () => {
   it("routes a north-perimeter officer around the warehouse", () => {
     const route = buildSiteRoute(
       { x: 22, y: 19 },
-      responderDestination("Loading zone", "G-01"),
+      responderDestination("Loading zone", "jordan-lee"),
     );
 
     expect(route.length).toBeGreaterThan(2);
@@ -28,7 +28,7 @@ describe("site routing", () => {
   it("keeps an unobstructed loading-zone response direct", () => {
     const route = buildSiteRoute(
       { x: 43, y: 71 },
-      responderDestination("Loading zone", "G-03"),
+      responderDestination("Loading zone", "maya-chen"),
     );
 
     expect(route).toHaveLength(2);
@@ -61,10 +61,10 @@ describe("site routing", () => {
 
   it("keeps every officer-to-zone route outside the warehouse clearance", () => {
     const officers = [
-      { id: "G-01", position: { x: 22, y: 19 } },
-      { id: "G-02", position: { x: 64, y: 61 } },
-      { id: "G-03", position: { x: 43, y: 71 } },
-      { id: "G-04", position: { x: 78, y: 82 } },
+      { id: "jordan-lee", position: { x: 22, y: 19 } },
+      { id: "amir-davis", position: { x: 64, y: 61 } },
+      { id: "maya-chen", position: { x: 43, y: 71 } },
+      { id: "luis-rivera", position: { x: 78, y: 82 } },
     ];
     const locations = [
       "Loading zone",

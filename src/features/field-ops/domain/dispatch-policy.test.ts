@@ -16,16 +16,16 @@ describe("dispatch policy", () => {
 
     expect(
       buildResponsePlan(northReport).map((item) => item.guard.id),
-    ).toEqual(["G-01", "G-03", "G-02", "G-04"]);
-    expect(buildResponsePlan(southReport)[0]?.guard.id).toBe("G-04");
+    ).toEqual(["jordan-lee", "maya-chen", "amir-davis", "luis-rivera"]);
+    expect(buildResponsePlan(southReport)[0]?.guard.id).toBe("luis-rivera");
   });
 
   it("excludes the officer requesting support", () => {
     const report = analyzeIncident("Officer Chen needs immediate support.");
 
-    expect(requestingGuardId(report.transcript)).toBe("G-03");
+    expect(requestingGuardId(report.transcript)).toBe("maya-chen");
     expect(buildResponsePlan(report).map((item) => item.guard.id)).not.toContain(
-      "G-03",
+      "maya-chen",
     );
   });
 

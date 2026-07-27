@@ -37,10 +37,10 @@ export function requestsAllOfficers(value: string) {
 
 export function requestingGuardId(value: string): GuardId | null {
   const transcript = value.toLowerCase();
-  if (/\b(?:officer\s+)?chen\b/.test(transcript)) return "G-03";
-  if (/\b(?:officer\s+)?davis\b/.test(transcript)) return "G-02";
-  if (/\b(?:officer\s+)?lee\b/.test(transcript)) return "G-01";
-  if (/\b(?:officer\s+)?rivera\b/.test(transcript)) return "G-04";
+  if (/\b(?:officer\s+)?chen\b/.test(transcript)) return "maya-chen";
+  if (/\b(?:officer\s+)?davis\b/.test(transcript)) return "amir-davis";
+  if (/\b(?:officer\s+)?lee\b/.test(transcript)) return "jordan-lee";
+  if (/\b(?:officer\s+)?rivera\b/.test(transcript)) return "luis-rivera";
   return null;
 }
 

@@ -18,10 +18,10 @@ export const BUILDING_OBSTACLE: MapObstacle = {
 } as const;
 
 const RESPONSE_OFFSETS: Record<string, MapPoint> = {
-  "G-01": { x: -3, y: -2 },
-  "G-02": { x: 3, y: -1 },
-  "G-03": { x: -2, y: 2 },
-  "G-04": { x: 4, y: 3 },
+  "jordan-lee": { x: -3, y: -2 },
+  "amir-davis": { x: 3, y: -1 },
+  "maya-chen": { x: -2, y: 2 },
+  "luis-rivera": { x: 4, y: 3 },
 };
 
 function routeDistance(first: MapPoint, second: MapPoint) {

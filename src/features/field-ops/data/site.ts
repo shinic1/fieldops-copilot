@@ -10,28 +10,32 @@ export type ActivityItem = {
 
 export const GUARDS = [
   {
-    id: "G-01",
+    id: "jordan-lee",
+    initials: "JL",
     name: "Jordan Lee",
     post: "North perimeter",
     position: { x: 22, y: 19 },
     className: "guard-one",
   },
   {
-    id: "G-02",
+    id: "amir-davis",
+    initials: "AD",
     name: "Amir Davis",
     post: "Main entrance",
     position: { x: 64, y: 61 },
     className: "guard-two",
   },
   {
-    id: "G-03",
+    id: "maya-chen",
+    initials: "MC",
     name: "Maya Chen",
     post: "Loading zone",
     position: { x: 43, y: 71 },
     className: "guard-three",
   },
   {
-    id: "G-04",
+    id: "luis-rivera",
+    initials: "LR",
     name: "Luis Rivera",
     post: "South lot",
     position: { x: 78, y: 82 },
@@ -39,6 +43,7 @@ export const GUARDS = [
   },
 ] as const satisfies ReadonlyArray<{
   id: string;
+  initials: string;
   name: string;
   post: string;
   position: MapPoint;
@@ -91,7 +96,7 @@ export const BASE_ACTIVITY: ActivityItem[] = [
   {
     id: "checkpoint",
     title: "Checkpoint verified",
-    detail: "North perimeter · G-01",
+    detail: "North perimeter · Jordan Lee",
     meta: "2m ago",
     tone: "success",
   },
