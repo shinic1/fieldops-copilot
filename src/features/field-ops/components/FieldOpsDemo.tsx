@@ -669,7 +669,9 @@ export function FieldOpsDemo() {
             ] as Array<[MobileView, string, IconName]>
           ).map(([value, label, icon]) => (
             <button
+              aria-current={mobileView === value ? "page" : undefined}
               className={mobileView === value ? "active" : ""}
+              disabled={value === "response" && !report}
               key={value}
               onClick={() => setMobileView(value)}
             >
@@ -679,6 +681,30 @@ export function FieldOpsDemo() {
             </button>
           ))}
         </nav>
+
+        {report && mobileView === "site" && (
+          <button
+            className="mobile-incident-banner"
+            onClick={() => setMobileView("response")}
+          >
+            <span className={severityClass(report.severity)}>
+              {report.severity}
+            </span>
+            <div>
+              <strong>{report.category}</strong>
+              <small>{report.location ?? "Location pending"}</small>
+            </div>
+            <div>
+              <strong>
+                {responseState === "resolved"
+                  ? "Resolved"
+                  : `${dispatchedGuards.length} responding`}
+              </strong>
+              <small>Open incident</small>
+            </div>
+            <Icon name="chevron" size={15} />
+          </button>
+        )}
 
         <div className="ops-content">
           <section
@@ -997,7 +1023,7 @@ export function FieldOpsDemo() {
           </section>
 
           <aside
-            className={`copilot-panel ${
+            className={`copilot-panel mobile-mode-${mobileView} ${
               mobileView === "site" ? "mobile-hidden" : ""
             }`}
           >
@@ -1341,7 +1367,11 @@ export function FieldOpsDemo() {
               )}
             </div>
 
-            <section className="report-composer">
+            <section
+              className={`report-composer ${
+                report ? "has-active-report" : ""
+              }`}
+            >
               <div className="composer-topline">
                 <span>
                   New report · Channel 4

@@ -164,6 +164,10 @@ button {
   min-height: calc(100vh - 72px);
 }
 
+.mobile-incident-banner {
+  display: none;
+}
+
 .site-workspace {
   min-width: 0;
   padding: 24px 28px 32px;
@@ -1219,7 +1223,8 @@ button {
   }
 
   .mobile-tabs {
-    height: 48px;
+    box-shadow: 0 1px 0 var(--line);
+    height: 52px;
     top: 62px;
   }
 
@@ -1227,17 +1232,22 @@ button {
     font-size: 11px;
   }
 
+  .mobile-tabs button:disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+  }
+
   .ops-content {
     display: block;
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 114px);
   }
 
   .site-workspace {
-    min-height: calc(100vh - 110px);
+    min-height: calc(100vh - 114px);
   }
 
   .copilot-panel {
-    height: calc(100vh - 110px);
+    height: calc(100vh - 114px);
     min-height: 620px;
     top: auto;
     width: 100%;
@@ -1246,38 +1256,102 @@ button {
 
 @media (max-width: 620px) {
   .site-workspace {
-    padding: 16px 12px 24px;
+    padding: 14px 12px 24px;
   }
 
   .workspace-heading {
-    align-items: flex-start;
-    gap: 14px;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
   }
 
   .workspace-heading h2 {
-    font-size: 21px;
+    font-size: 22px;
   }
 
   .workspace-heading p {
+    display: -webkit-box;
     font-size: 11px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.35;
+    margin-top: 6px;
+    overflow: hidden;
     white-space: normal;
   }
 
   .run-simulation {
     flex: 0 0 auto;
-    font-size: 0;
+    font-size: 11px;
     height: 38px;
-    padding: 0;
-    width: 38px;
+    padding: 0 11px;
+    width: auto;
   }
 
   .run-simulation svg {
-    height: 16px;
-    width: 16px;
+    height: 14px;
+    width: 14px;
+  }
+
+  .mobile-incident-banner {
+    align-items: center;
+    background: #fff;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    min-height: 58px;
+    padding: 9px 13px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .mobile-incident-banner > span {
+    background: #fff0eb;
+    color: var(--orange);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 5px 6px;
+    text-transform: uppercase;
+  }
+
+  .mobile-incident-banner > span.critical,
+  .mobile-incident-banner > span.high {
+    background: #fff0ed;
+    color: #bf3d29;
+  }
+
+  .mobile-incident-banner > div {
+    display: flex;
+    min-width: 0;
+  }
+
+  .mobile-incident-banner > div:nth-of-type(1) {
+    flex-direction: column;
+  }
+
+  .mobile-incident-banner > div:nth-of-type(2) {
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .mobile-incident-banner strong {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-incident-banner small {
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 3px;
   }
 
   .map-toolbar {
-    height: 52px;
+    height: 54px;
     padding: 0 11px;
   }
 
@@ -1286,25 +1360,61 @@ button {
   }
 
   .map-metrics {
-    gap: 9px;
+    gap: 10px;
   }
 
   .map-metrics span {
-    font-size: 0;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .map-metrics span:last-child {
+    display: none;
   }
 
   .officer-strip {
-    grid-template-columns: repeat(4, 112px);
+    display: flex;
+    gap: 8px;
     overflow-x: auto;
+    padding: 8px;
+    scroll-padding-inline: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .officer-strip::-webkit-scrollbar {
+    display: none;
   }
 
   .officer-strip button {
-    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    flex: 0 0 148px;
+    min-height: 54px;
+    padding: 9px 10px;
+    scroll-snap-align: start;
+  }
+
+  .officer-strip button:last-child {
+    border-right: 1px solid var(--line);
+  }
+
+  .officer-strip button.selected {
+    border-color: #f0a38f;
+    box-shadow: inset 0 -2px 0 var(--orange);
   }
 
   .operations-map {
-    height: calc(100vh - 316px);
-    min-height: 400px;
+    height: min(470px, calc(100vh - 300px));
+    min-height: 420px;
+  }
+
+  .selected-officer {
+    bottom: 12px;
+    left: 12px;
+    min-width: 0;
+    right: 12px;
+    width: auto;
   }
 
   .activity-table {
@@ -1316,12 +1426,42 @@ button {
   }
 
   .copilot-scroll {
-    padding: 19px 16px;
+    padding: 18px 16px;
   }
 
   .copilot-heading {
-    flex-basis: 62px;
-    padding: 0 16px;
+    align-content: center;
+    flex-basis: auto;
+    flex-wrap: wrap;
+    min-height: 62px;
+    padding: 10px 16px 0;
+  }
+
+  .copilot-heading:has(.copilot-tabs) {
+    min-height: 96px;
+  }
+
+  .copilot-heading > div:first-child {
+    min-width: 0;
+  }
+
+  .copilot-heading > div:first-child strong {
+    font-size: 14px;
+  }
+
+  .copilot-heading .copilot-tabs {
+    border-bottom: 1px solid var(--line);
+    flex: 0 0 100%;
+    gap: 0;
+    height: 37px;
+    justify-content: flex-start;
+    margin-top: 7px;
+  }
+
+  .copilot-heading .copilot-tabs button {
+    flex: 0 0 auto;
+    margin-right: 22px;
+    padding: 0;
   }
 
   .incident-review-title h2 {
@@ -1337,7 +1477,16 @@ button {
   }
 
   .report-composer {
+    border-top: 1px solid var(--line);
     padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+
+  .mobile-mode-response .report-composer.has-active-report {
+    display: none;
+  }
+
+  .mobile-mode-response .copilot-scroll {
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
   }
 
   .scenario-chips > span {
